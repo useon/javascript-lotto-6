@@ -3,7 +3,7 @@ class Bonus {
   constructor(inputBonusNumber, lottoNumbers) {
     this.#bonusNumber = 0;
     this.#validate(inputBonusNumber, lottoNumbers);
-    this.convert(inputBonusNumber);
+    this.#convert(inputBonusNumber);
   }
 
   #validate(inputBonusNumber, lottoNumbers) {
@@ -19,7 +19,7 @@ class Bonus {
       throw new Error('[ERROR] 보너스 번호는 숫자 1 이상 45 이하여야 합니다.');
   }
 
-  convert(inputBonusNumber) {
+  #convert(inputBonusNumber) {
     this.#bonusNumber = Number(inputBonusNumber);
   }
 

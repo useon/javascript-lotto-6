@@ -3,7 +3,7 @@ class Purchaser {
   constructor(amount) {
     this.#purchaseQuantity = 0;
     this.#validate(amount);
-    this.purchase(amount);
+    this.#purchase(amount);
   }
 
   #validate(amount) {
@@ -13,7 +13,7 @@ class Purchaser {
       throw new Error('[ERROR] 구매 금액은 1,000원 단위여야 합니다.');
   }
 
-  purchase(amount) {
+  #purchase(amount) {
     return (this.#purchaseQuantity = Number(amount) / 1000);
   }
 

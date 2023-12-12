@@ -9,10 +9,10 @@ class Comparator {
       [30000000, 0],
       [2000000000, 0],
     ]);
-    this.comparate(lottoNumbers, bonusNumber, tickts);
+    this.#comparate(lottoNumbers, bonusNumber, tickts);
   }
 
-  comparate(lottoNumbers, bonusNumber, tickts) {
+  #comparate(lottoNumbers, bonusNumber, tickts) {
     tickts.forEach((tickt) => {
       const matchCount = lottoNumbers.filter((number) =>
         tickt.includes(number),
