@@ -1,5 +1,6 @@
 import Lotto from '../Lotto.js';
 import Bonus from '../models/Bonus.js';
+import Comparator from '../models/Comparator.js';
 import Issuer from '../models/Issuer.js';
 import Purchaser from '../models/Purchaser.js';
 import handlerErrorAndProceed from '../utils/handlerErrorAndProceed.js';
@@ -15,6 +16,8 @@ class Controller {
   #lottoNumbers;
 
   #bonusNumber;
+
+  #winningHistory;
 
   constructor() {
     this.#purchaseQuantity = 0;
@@ -33,6 +36,11 @@ class Controller {
     this.#bonusNumber = await handlerErrorAndProceed(
       this.setBonusNumber,
       this.#lottoNumbers,
+    );
+    this.#winningHistory = this.setWinningHistory(
+      this.#lottoNumbers,
+      this.#bonusNumber,
+      this.#tickts,
     );
   }
 
@@ -55,6 +63,10 @@ class Controller {
   async setBonusNumber(lottoNumbers) {
     const inputValue = await InputView.readBonusNumber();
     return new Bonus(inputValue, lottoNumbers).result;
+  }
+
+  setWinningHistory(lottoNumbers, bonusNumber, tickts) {
+    return new Comparator(lottoNumbers, bonusNumber, tickts).result;
   }
 }
 
