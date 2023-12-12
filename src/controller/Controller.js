@@ -10,43 +10,26 @@ import InputView from '../views/InputView.js';
 import OutputView from '../views/OutputView.js';
 
 class Controller {
-  #purchaseQuantity;
-
-  #tickts;
-
-  #lottoNumbers;
-
-  #bonusNumber;
-
-  #winningHistory;
-
-  constructor() {
-    this.#purchaseQuantity = 0;
-    this.#tickts = [];
-    this.#lottoNumbers = [];
-    this.#bonusNumber = 0;
-  }
-
   async progress() {
-    this.#purchaseQuantity = await handlerErrorAndProceed(
+    const purchaseQuantity = await handlerErrorAndProceed(
       this.setPurchaseQuantity,
     );
-    this.#tickts = this.setTickets(this.#purchaseQuantity);
-    OutputView.printTickets(this.#tickts);
-    this.#lottoNumbers = await handlerErrorAndProceed(this.setLottoNumbers);
-    this.#bonusNumber = await handlerErrorAndProceed(
+    const tickts = this.setTickets(purchaseQuantity);
+    OutputView.printTickets(tickts);
+    const lottoNumbers = await handlerErrorAndProceed(this.setLottoNumbers);
+    const bonusNumber = await handlerErrorAndProceed(
       this.setBonusNumber,
-      this.#lottoNumbers,
+      lottoNumbers,
     );
-    this.#winningHistory = this.setWinningHistory(
-      this.#lottoNumbers,
-      this.#bonusNumber,
-      this.#tickts,
+    const winningHistory = this.setWinningHistory(
+      lottoNumbers,
+      bonusNumber,
+      tickts,
     );
-    OutputView.printWinningHistory(this.#winningHistory);
+    OutputView.printWinningHistory(winningHistory);
     const rateOfReturnOutPutFormat = new Calculator(
-      this.#purchaseQuantity,
-      this.#winningHistory,
+      purchaseQuantity,
+      winningHistory,
     ).result;
     OutputView.printRateOfReturn(rateOfReturnOutPutFormat);
   }
