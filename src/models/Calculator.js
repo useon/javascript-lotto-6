@@ -1,12 +1,13 @@
 class Calculator {
-  #rateOfReturn;
+  #outputFormatRateOfReturn;
   constructor(purchaseQuantity, winningHistory) {
     const purchaseAmount = this.calculatePurchaseAmount(purchaseQuantity);
     const totalWinningAmount = this.calculateTotalWinningAmount(winningHistory);
-    this.#rateOfReturn = this.calculateRateOfReturn(
+    const rateOfReturn = this.calculateRateOfReturn(
       purchaseAmount,
       totalWinningAmount,
     );
+    this.#outputFormatRateOfReturn = this.setOutPutFormat(rateOfReturn);
   }
 
   calculatePurchaseAmount(purchaseQuantity) {
@@ -22,12 +23,18 @@ class Calculator {
   }
 
   calculateRateOfReturn(purchaseAmount, totalWinningAmount) {
-    console.log(purchaseAmount, totalWinningAmount);
     return ((totalWinningAmount / purchaseAmount) * 100).toFixed(1);
   }
 
+  setOutPutFormat(rateOfReturn) {
+    const convertOutPutFormat = rateOfReturn
+      .toString()
+      .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
+    return convertOutPutFormat;
+  }
+
   get result() {
-    return this.#rateOfReturn;
+    return this.#outputFormatRateOfReturn;
   }
 }
 
