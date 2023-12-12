@@ -1,5 +1,6 @@
 import Lotto from '../Lotto.js';
 import Bonus from '../models/Bonus.js';
+import Calculator from '../models/Calculator.js';
 import Comparator from '../models/Comparator.js';
 import Issuer from '../models/Issuer.js';
 import Purchaser from '../models/Purchaser.js';
@@ -43,6 +44,10 @@ class Controller {
       this.#tickts,
     );
     OutputView.printWinningHistory(this.#winningHistory);
+    const rateOfReturn = new Calculator(
+      this.#purchaseQuantity,
+      this.#winningHistory,
+    ).result;
   }
 
   async setPurchaseQuantity() {
