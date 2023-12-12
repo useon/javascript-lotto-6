@@ -1,18 +1,23 @@
+import Purchaser from '../models/Purchaser.js';
+import handlerErrorAndProceed from '../utils/handlerErrorAndProceed.js';
 import InputView from '../views/InputView.js';
 
 class Controller {
-  #purchaseAmount;
+  #purchaseQuantity;
 
   constructor() {
-    this.#purchaseAmount = 0;
+    this.#purchaseQuantity = 0;
   }
 
   async progress() {
-    this.setPurchaseAmount();
+    this.#purchaseQuantity = await handlerErrorAndProceed(
+      this.setPurchaseQuantity,
+    );
   }
 
-  async setPurchaseAmount() {
+  async setPurchaseQuantity() {
     const inputValue = await InputView.readPurchaseAmount();
+    return new Purchaser(inputValue).result;
   }
 }
 
