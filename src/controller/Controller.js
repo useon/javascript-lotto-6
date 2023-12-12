@@ -26,6 +26,7 @@ class Controller {
     this.#tickts = this.setTickets(this.#purchaseQuantity);
     OutputView.printTickets(this.#tickts);
     this.#lottoNumbers = await handlerErrorAndProceed(this.setLottoNumbers);
+    this.setBonusNumber();
   }
 
   async setPurchaseQuantity() {
@@ -42,6 +43,10 @@ class Controller {
     lottoNumbersValidation(inputValue);
     const convertStringToArray = inputValue.split(',').map((e) => Number(e));
     return new Lotto(convertStringToArray).result;
+  }
+
+  async setBonusNumber() {
+    const inputValue = await InputView.readBonusNumber();
   }
 }
 
