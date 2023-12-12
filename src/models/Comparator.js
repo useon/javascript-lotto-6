@@ -2,7 +2,6 @@ class Comparator {
   #winningHistory;
 
   constructor(lottoNumbers, bonusNumber, tickts) {
-    // 로또 번호와 당첨 번호와 티켓들 이렇게 받아오고
     this.#winningHistory = new Map([
       [5000, 0],
       [50000, 0],
@@ -13,7 +12,6 @@ class Comparator {
     this.comparate(lottoNumbers, bonusNumber, tickts);
   }
 
-  // 비교하기
   comparate(lottoNumbers, bonusNumber, tickts) {
     tickts.forEach((tickt) => {
       const matchCount = lottoNumbers.filter((number) =>
