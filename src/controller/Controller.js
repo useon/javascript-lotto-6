@@ -12,16 +12,18 @@ import OutputView from '../views/OutputView.js';
 class Controller {
   async progress() {
     const purchaseQuantity = await handlerErrorAndProceed(
-      this.setPurchaseQuantity,
+      Controller.setPurchaseQuantity,
     );
-    const tickts = this.setTickets(purchaseQuantity);
+    const tickts = Controller.setTickets(purchaseQuantity);
     OutputView.printTickets(tickts);
-    const lottoNumbers = await handlerErrorAndProceed(this.setLottoNumbers);
+    const lottoNumbers = await handlerErrorAndProceed(
+      Controller.setLottoNumbers,
+    );
     const bonusNumber = await handlerErrorAndProceed(
-      this.setBonusNumber,
+      Controller.setBonusNumber,
       lottoNumbers,
     );
-    const winningHistory = this.setWinningHistory(
+    const winningHistory = Controller.setWinningHistory(
       lottoNumbers,
       bonusNumber,
       tickts,
@@ -34,28 +36,28 @@ class Controller {
     OutputView.printRateOfReturn(rateOfReturnOutPutFormat);
   }
 
-  async setPurchaseQuantity() {
+  static async setPurchaseQuantity() {
     const inputValue = await InputView.readPurchaseAmount();
     return new Purchaser(inputValue).result;
   }
 
-  setTickets(quantity) {
+  static setTickets(quantity) {
     return new Issuer(quantity).result;
   }
 
-  async setLottoNumbers() {
+  static async setLottoNumbers() {
     const inputValue = await InputView.readLottoNumbers();
     lottoNumbersValidation(inputValue);
     const convertStringToArray = inputValue.split(',').map((e) => Number(e));
     return new Lotto(convertStringToArray).result;
   }
 
-  async setBonusNumber(lottoNumbers) {
+  static async setBonusNumber(lottoNumbers) {
     const inputValue = await InputView.readBonusNumber();
     return new Bonus(inputValue, lottoNumbers).result;
   }
 
-  setWinningHistory(lottoNumbers, bonusNumber, tickts) {
+  static setWinningHistory(lottoNumbers, bonusNumber, tickts) {
     return new Comparator(lottoNumbers, bonusNumber, tickts).result;
   }
 }
