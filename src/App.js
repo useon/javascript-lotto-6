@@ -1,5 +1,12 @@
+import Controller from './controller/Controller.js';
+
 class App {
-  async play() {}
+  constructor() {
+    this.controller = new Controller();
+  }
+  async play() {
+    await this.controller.progress();
+  }
 }
 
 export default App;
