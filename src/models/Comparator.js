@@ -6,7 +6,7 @@ class Comparator {
     this.#winningHistory = new Map([
       [5000, 0],
       [50000, 0],
-      [150000, 0],
+      [1500000, 0],
       [30000000, 0],
       [2000000000, 0],
     ]);
@@ -25,7 +25,10 @@ class Comparator {
       if (matchCount === 4)
         this.#winningHistory.set(50000, this.#winningHistory.get(50000) + 1);
       if (matchCount === 5 && !isBonusMatch)
-        this.#winningHistory.set(150000, this.#winningHistory.get(150000) + 1);
+        this.#winningHistory.set(
+          1500000,
+          this.#winningHistory.get(1500000) + 1,
+        );
       if (matchCount === 5 && isBonusMatch)
         this.#winningHistory.set(
           30000000,
