@@ -27,6 +27,10 @@ const OutputView = {
       `6개 일치 (2,000,000,000원) - ${winningHistory.get(2000000000)}개`,
     );
   },
+
+  printRateOfReturn(rateOfReturnOutPutFormat) {
+    Console.print(`총 수익률은 ${rateOfReturnOutPutFormat}%입니다.`);
+  },
 };
 
 export default OutputView;

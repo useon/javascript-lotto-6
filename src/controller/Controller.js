@@ -44,10 +44,11 @@ class Controller {
       this.#tickts,
     );
     OutputView.printWinningHistory(this.#winningHistory);
-    const rateOfReturn = new Calculator(
+    const rateOfReturnOutPutFormat = new Calculator(
       this.#purchaseQuantity,
       this.#winningHistory,
     ).result;
+    OutputView.printRateOfReturn(rateOfReturnOutPutFormat);
   }
 
   async setPurchaseQuantity() {
