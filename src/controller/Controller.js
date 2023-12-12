@@ -2,6 +2,7 @@ import Issuer from '../models/Issuer.js';
 import Purchaser from '../models/Purchaser.js';
 import handlerErrorAndProceed from '../utils/handlerErrorAndProceed.js';
 import InputView from '../views/InputView.js';
+import OutputView from '../views/OutputView.js';
 
 class Controller {
   #purchaseQuantity;
@@ -18,6 +19,7 @@ class Controller {
       this.setPurchaseQuantity,
     );
     this.#tickts = this.setTickets(this.#purchaseQuantity);
+    OutputView.printTickets(this.#tickts);
   }
 
   async setPurchaseQuantity() {
