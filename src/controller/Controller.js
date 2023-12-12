@@ -42,6 +42,7 @@ class Controller {
       this.#bonusNumber,
       this.#tickts,
     );
+    OutputView.printWinningHistory(this.#winningHistory);
   }
 
   async setPurchaseQuantity() {
