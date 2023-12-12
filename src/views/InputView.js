@@ -7,6 +7,13 @@ const InputView = {
     );
     return inputValue;
   },
+
+  async readLottoNumbers() {
+    const inputValue = await Console.readLineAsync(
+      '\n당첨 번호를 입력해 주세요.\n',
+    );
+    return inputValue;
+  },
 };
 
 export default InputView;
