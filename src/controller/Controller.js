@@ -1,4 +1,5 @@
 import Lotto from '../Lotto.js';
+import Bonus from '../models/Bonus.js';
 import Issuer from '../models/Issuer.js';
 import Purchaser from '../models/Purchaser.js';
 import handlerErrorAndProceed from '../utils/handlerErrorAndProceed.js';
@@ -13,10 +14,13 @@ class Controller {
 
   #lottoNumbers;
 
+  #bonusNumber;
+
   constructor() {
     this.#purchaseQuantity = 0;
     this.#tickts = [];
     this.#lottoNumbers = [];
+    this.#bonusNumber = 0;
   }
 
   async progress() {
@@ -26,7 +30,10 @@ class Controller {
     this.#tickts = this.setTickets(this.#purchaseQuantity);
     OutputView.printTickets(this.#tickts);
     this.#lottoNumbers = await handlerErrorAndProceed(this.setLottoNumbers);
-    this.setBonusNumber();
+    this.#bonusNumber = await handlerErrorAndProceed(
+      this.setBonusNumber,
+      this.#lottoNumbers,
+    );
   }
 
   async setPurchaseQuantity() {
@@ -45,8 +52,9 @@ class Controller {
     return new Lotto(convertStringToArray).result;
   }
 
-  async setBonusNumber() {
+  async setBonusNumber(lottoNumbers) {
     const inputValue = await InputView.readBonusNumber();
+    return new Bonus(inputValue, lottoNumbers).result;
   }
 }
 
